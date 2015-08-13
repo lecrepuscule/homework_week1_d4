@@ -6,35 +6,37 @@
 // }
 
 
-var requiredIds = {
-  Basic: {
+var inputIds = {
+  basic: {
     firstNum: "basic-num-1",
     secondNum: "basic-num-2",
     operator: "basic-operation"
   },
-  Trip: {
+  trip: {
     distance: "trip-distance",
     mpg: "trip-mpg",
     cpg: "trip-cost",
     speed: "trip-speed"
   },
-  BMI: {
+  bmi: {
     measurement: "bmi-units",
     weight: "bmi-mass",
     height: "bmi-height"
   },
-  Morgage: {
+  morgage: {
     principal: "mortgage-loan",
     interestRate: "mortgage-apr",
     term: "mortgage-term"
   }
 };
 
+var eventIds = ["-calc", "-answer", "-answer-alert"];
+
 function runBasicCalculator () {
 
-  firstNum = Number(document.getElementById(requiredIds.Basic.firstNum).value);
-  operator = document.getElementById(requiredIds.Basic.operator).value;
-  secondNum = Number(document.getElementById(requiredIds.Basic.secondNum).value);
+  firstNum = Number(document.getElementById(inputIds.basic.firstNum).value);
+  operator = document.getElementById(inputIds.basic.operator).value;
+  secondNum = Number(document.getElementById(inputIds.basic.secondNum).value);
   return result = doBasicMath (operator, firstNum, secondNum);
 }
 
@@ -62,9 +64,13 @@ function doBasicMath (operator, firstNum, secondNum) {
   }
 }
 
+function getEventIds(feature) {
+  answer = document.getElementById(feature +"-answer");
+
+}
+
 
 var basicAnswer = document.getElementById("basic-answer");
-
 var basicButton = document.getElementById("basic-calc");
 var basicAnswerText = document.getElementById("basic-answer-alert");
 
