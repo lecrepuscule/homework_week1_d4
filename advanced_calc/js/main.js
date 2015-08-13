@@ -36,19 +36,19 @@ function runCalculator (feature) {
 
     switch (feature) {
       case "basic":
-      runBasicCalculator();
+      return runBasicCalculator();
       break;
 
       case "mortgage":
-      runMortgageCalculator();
+      return runMortgageCalculator();
       break;
 
       case "bmi":
-      runBMICalculator();
+      return runBMICalculator();
       break;
 
       case "trip":
-      runTripCalculator();
+      return runTripCalculator();
       break;
 
       default:
@@ -61,14 +61,14 @@ function runBasicCalculator () {
   firstNum = Number(document.getElementById(inputDictionary.basic.firstNum).value);
   operator = document.getElementById(inputDictionary.basic.operator).value;
   secondNum = Number(document.getElementById(inputDictionary.basic.secondNum).value);
-  return result = doBasicMath (operator, firstNum, secondNum);
+  return doBasicMath (operator, firstNum, secondNum);
 }
 
 function runMortgageCalculator () {
   principal = Number(document.getElementById(inputDictionary.mortgage.principal).value);
   interestRate = Number(document.getElementById(inputDictionary.mortgage.interestRate).value);
   numberOfPayments = Number(document.getElementById(inputDictionary.mortgage.term).value);
-  return monthlyPayment = doMortgageCalculation (principal, interestRate, numberOfPayments);
+  return doMortgageCalculation(principal, interestRate, numberOfPayments);
 }
 
 function runBMICalculator() {
@@ -147,31 +147,46 @@ function doTripCalculation(d, s, mpg, cpg) {
 // }
 
 
-// var basicAnswer = document.getElementById("basic-answer");
-// var basicButton = document.getElementById("basic-calc");
-// var basicAnswerText = document.getElementById("basic-answer-alert");
+var basicAnswer = document.getElementById("basic-answer");
+var basicButton = document.getElementById("basic-calc");
+var basicAnswerText = document.getElementById("basic-answer-alert");
 
 
+basicButton.addEventListener("click", function() {
+  basicAnswer.className = "show";
+  basicAnswerText.innerText = runCalculator("basic");
+})
 
-// basicButton.addEventListener("click", function() {
-//   basicAnswer.className = "show";
-//   basicAnswerText.innerText = runBasicCalculator();
-// })
+var mortgageAnswer = document.getElementById("mortgage-answer");
+var mortgageButton = document.getElementById("mortgage-calc");
+var mortgageAnswerText = document.getElementById("mortgage-answer-alert");
 
-function clickEvent (param) {
-  param[0].className = "show";
-  param[1].innerText = runCalculator(param[2]);  
+
+mortgageButton.addEventListener("click", function() {
+  mortgageAnswer.className = "show";
+  mortgageAnswerText.innerText = runMortgageCalculator();
+})
+
+var answer;
+var answerText;
+
+function clickEvent (key) {
+  var key = key;
+  answer = document.getElementById(key+"-answer");
+  answerText = document.getElementById(key+"-answer-alert");
+  console.log(answer.className);
+  console.log(button.id);
+  answer.className = "show";
+  result = runCalculator(key);
+  console.log(result);
+  answerText.innerText = result;  
 } 
 
 for (key in inputDictionary) {
   var button = document.getElementById(key+"-calc");
-  var answer = document.getElementById(key+"-answer");
-  var answerText = document.getElementById(key+"-answer-alert");
-  console.log(answer.className);
-  console.log(button.id);
-  var test = [answer, answerText, key];
-  button.addEventListener("click", function(event, test){
-    clickEvent (test);
+  button.addEventListener("click", function(){
+    event.preventDefault();
+    clickEvent(key);
   })
 }
 
