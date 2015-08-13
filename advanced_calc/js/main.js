@@ -88,7 +88,7 @@ function runTripCalculator() {
     alert("The speed is too high for the given Fuel Efficiency in mpg!");
   }
   else {
-    return ("time " + result["time"] +"; cost" + result["cost"]);
+    return ("time " + result["time"] + "; cost" + result["cost"]);
   }
 }
 
@@ -137,7 +137,7 @@ function doTripCalculation(d, s, mpg, cpg) {
   time = d/s;
   mpg -= reduceFuelEfficiency(s, mpg);
   cost = mpg <= 0 ? "infinite" : (d/mpg * cpg);
-  return {"time ": time, "cost ": cost};
+  return {"time ": time, " cost ": cost};
 }
 
 // function getEventIds(feature) {
@@ -212,16 +212,22 @@ for (key in inputDictionary) {
   })
 }
 
-// var inputFields = document.getElementsByClassName("form-control");
-// for (i=0; i<inputFields.length; i++) {
-//   var id = inputFields[i].id;
-//   // idPrefix = id.split("-")[0] + "-answer";
-//   // answerId = idPrefix + "-answer";
-//   // var answerField = document.getElementById(id.split("-")[0] + "-answer");
-//   // console.log(answerField);
-//   inputFields[i].addEventListener("focus", function(){
-//     answerField.className="hide";
-//   })
-// }
+
+
+var inputFields = document.getElementsByClassName("form-control");
+for (i=0; i<inputFields.length; i++) {
+  var id = inputFields[i].id;
+  // idPrefix = id.split("-")[0] + "-answer";
+  // answerId = idPrefix + "-answer";
+  // var answerField = document.getElementById(id.split("-")[0] + "-answer");
+  // console.log(answerField);
+  inputFields[i].addEventListener("focus", function(){
+    basicAnswer.className="hide";
+    bmiAnswer.className="hide";
+    tripAnswer.className="hide";
+    mortgageAnswer.className="hide";
+
+  })
+}
 
 
