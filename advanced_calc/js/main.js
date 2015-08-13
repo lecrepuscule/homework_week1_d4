@@ -64,10 +64,11 @@ function doBasicMath (operator, firstNum, secondNum) {
   }
 }
 
-function getEventIds(feature) {
-  answer = document.getElementById(feature +"-answer");
+// function getEventIds(feature) {
+//   eventIds.forEach (value, index) {
+//   answer = document.getElementById(feature +"-answer");
 
-}
+// }
 
 
 var basicAnswer = document.getElementById("basic-answer");
@@ -88,5 +89,9 @@ basicButton.addEventListener("click", function() {
   basicAnswerText.innerText = runBasicCalculator();
 })
 
+var inputFields = document.getElementsByClassName("form-control");
+for (i=0; i<inputFields.length; i++) {
+  inputFields[i].addEventListener("focus", function(){basicAnswer.className="hide";})
+}
 
 
