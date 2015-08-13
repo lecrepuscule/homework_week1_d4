@@ -123,7 +123,7 @@ function doMortgageCalculation (p, ir, n) {
 
 function doBMICalculation(w, h, m) {
   BMI = w/Math.pow(h,2);
-  (m === "Imperial") ? BMI = (BMI * 703) : BMI;
+  (m === "imperial") ? BMI = (BMI * 703) : BMI;
   return BMI;
 }
 
@@ -177,6 +177,18 @@ tripButton.addEventListener("click", function() {
   tripAnswerText.innerText = runCalculator("trip");
 })
 
+var bmiAnswer = document.getElementById("bmi-answer");
+var bmiButton = document.getElementById("bmi-calc");
+var bmiAnswerText = document.getElementById("bmi-answer-alert");
+
+
+  bmiButton.addEventListener("click", function() {
+  bmiAnswer.className = "show";
+  bmiAnswerText.innerText = runCalculator("bmi");
+})
+
+
+///////////////////////
 var answer;
 var answerText;
 
