@@ -188,7 +188,7 @@ function doTripCalculation(d, s, mpg, cpg) {
 // })
 
 
-///////////////////////refactoring in progress//////////////////////
+///////////////////////refactored//////////////////////
 
 
 function clickEvent (feature) {
@@ -212,21 +212,18 @@ for (key in inputDictionary) {
 
 
 var inputFields = document.getElementsByClassName("form-control");
+
 for (i=0; i<inputFields.length; i++) {
-  var id = inputFields[i].id;
-  idPrefix = id.split("-")[0] + "-answer";
-  answerId = idPrefix + "-answer";
-  var answerField = document.getElementById(id.split("-")[0] + "-answer");
-  console.log(answerField.className);
   inputFields[i].addEventListener("focus", function(){
-    answerField.className = "hide"
+    answerFieldId = this.id.split("-")[0] + "-answer";
+    answerField = document.getElementById(answerFieldId);
+    answerField.className = "hide";
     // basicAnswer.className="hide";
     // bmiAnswer.className="hide";
     // tripAnswer.className="hide";
     // mortgageAnswer.className="hide";
-
   })
 }
-///////////refactoring in progress///////////
+
 
 
