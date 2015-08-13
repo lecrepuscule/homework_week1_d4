@@ -75,7 +75,7 @@ function runBMICalculator() {
   var measurement = document.getElementById(inputDictionary.bmi.measurement).value;
   weight = Number(document.getElementById(inputDictionary.bmi.weight).value);
   height = Number(document.getElementById(inputDictionary.bmi.height).value);
-  return BMI = doBMICalculation(weight, height, measurement);
+  return doBMICalculation(weight, height, measurement);
 }
 
 function runTripCalculator() {
@@ -88,7 +88,7 @@ function runTripCalculator() {
     alert("The speed is too high for the given Fuel Efficiency in mpg!");
   }
   else {
-    return "time " + result["time"] +"; cost" + result["cost"];
+    return ("time " + result["time"] +"; cost" + result["cost"]);
   }
 }
 
@@ -137,7 +137,7 @@ function doTripCalculation(d, s, mpg, cpg) {
   time = d/s;
   mpg -= reduceFuelEfficiency(s, mpg);
   cost = mpg <= 0 ? "infinite" : (d/mpg * cpg);
-  return {"time": time, "cost": cost};
+  return {"time ": time, "cost ": cost};
 }
 
 // function getEventIds(feature) {
@@ -164,7 +164,17 @@ var mortgageAnswerText = document.getElementById("mortgage-answer-alert");
 
 mortgageButton.addEventListener("click", function() {
   mortgageAnswer.className = "show";
-  mortgageAnswerText.innerText = runMortgageCalculator();
+  mortgageAnswerText.innerText = runCalculator("mortgage");
+})
+
+var tripAnswer = document.getElementById("trip-answer");
+var tripButton = document.getElementById("trip-calc");
+var tripAnswerText = document.getElementById("trip-answer-alert");
+
+
+tripButton.addEventListener("click", function() {
+  tripAnswer.className = "show";
+  tripAnswerText.innerText = runCalculator("trip");
 })
 
 var answer;
