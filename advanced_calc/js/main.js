@@ -8,8 +8,8 @@
 
 var requiredIds = {
   Basic: {
-    firstNumber: "basic-num-1",
-    secondNumber: "basic-num-2",
+    firstNum: "basic-num-1",
+    secondNum: "basic-num-2",
     operator: "basic-operation"
   },
   Trip: {
@@ -32,13 +32,14 @@ var requiredIds = {
 
 function runBasicCalculator () {
 
-  firstNum = document.getElementById(requiredIds.Basic.operator).value;
+  firstNum = Number(document.getElementById(requiredIds.Basic.firstNum).value);
   operator = document.getElementById(requiredIds.Basic.operator).value;
-  secondNum = document.getElementById(requiredIds.Basic.operator).value;
+  secondNum = Number(document.getElementById(requiredIds.Basic.secondNum).value);
   return result = doBasicMath (operator, firstNum, secondNum);
 }
 
 function doBasicMath (operator, firstNum, secondNum) {
+
   switch (operator) {
     case "+":
     return (firstNum + secondNum);
