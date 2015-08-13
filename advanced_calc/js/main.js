@@ -147,60 +147,56 @@ function doTripCalculation(d, s, mpg, cpg) {
 // }
 
 
-var basicAnswer = document.getElementById("basic-answer");
-var basicButton = document.getElementById("basic-calc");
-var basicAnswerText = document.getElementById("basic-answer-alert");
+// var basicAnswer = document.getElementById("basic-answer");
+// var basicButton = document.getElementById("basic-calc");
+// var basicAnswerText = document.getElementById("basic-answer-alert");
 
 
-basicButton.addEventListener("click", function() {
-  basicAnswer.className = "show";
-  basicAnswerText.innerText = runCalculator("basic");
-})
+// basicButton.addEventListener("click", function() {
+//   basicAnswer.className = "show";
+//   basicAnswerText.innerText = runCalculator("basic");
+// })
 
-var mortgageAnswer = document.getElementById("mortgage-answer");
-var mortgageButton = document.getElementById("mortgage-calc");
-var mortgageAnswerText = document.getElementById("mortgage-answer-alert");
-
-
-mortgageButton.addEventListener("click", function() {
-  mortgageAnswer.className = "show";
-  mortgageAnswerText.innerText = runCalculator("mortgage");
-})
-
-var tripAnswer = document.getElementById("trip-answer");
-var tripButton = document.getElementById("trip-calc");
-var tripAnswerText = document.getElementById("trip-answer-alert");
+// var mortgageAnswer = document.getElementById("mortgage-answer");
+// var mortgageButton = document.getElementById("mortgage-calc");
+// var mortgageAnswerText = document.getElementById("mortgage-answer-alert");
 
 
-tripButton.addEventListener("click", function() {
-  tripAnswer.className = "show";
-  tripAnswerText.innerText = runCalculator("trip");
-})
+// mortgageButton.addEventListener("click", function() {
+//   mortgageAnswer.className = "show";
+//   mortgageAnswerText.innerText = runCalculator("mortgage");
+// })
 
-var bmiAnswer = document.getElementById("bmi-answer");
-var bmiButton = document.getElementById("bmi-calc");
-var bmiAnswerText = document.getElementById("bmi-answer-alert");
-
-
-  bmiButton.addEventListener("click", function() {
-  bmiAnswer.className = "show";
-  bmiAnswerText.innerText = runCalculator("bmi");
-})
+// var tripAnswer = document.getElementById("trip-answer");
+// var tripButton = document.getElementById("trip-calc");
+// var tripAnswerText = document.getElementById("trip-answer-alert");
 
 
-///////////////////////
-var answer;
-var answerText;
+// tripButton.addEventListener("click", function() {
+//   tripAnswer.className = "show";
+//   tripAnswerText.innerText = runCalculator("trip");
+// })
 
-function clickEvent (key) {
-  var key = key;
-  answer = document.getElementById(key+"-answer");
-  answerText = document.getElementById(key+"-answer-alert");
-  console.log(answer.className);
-  console.log(button.id);
+// var bmiAnswer = document.getElementById("bmi-answer");
+// var bmiButton = document.getElementById("bmi-calc");
+// var bmiAnswerText = document.getElementById("bmi-answer-alert");
+
+
+//   bmiButton.addEventListener("click", function() {
+//   bmiAnswer.className = "show";
+//   bmiAnswerText.innerText = runCalculator("bmi");
+// })
+
+
+///////////////////////refactoring in progress//////////////////////
+
+
+function clickEvent (feature) {
+  var feature = feature;
+  var answer = document.getElementById(feature+"-answer");
+  var answerText = document.getElementById(feature+"-answer-alert");
   answer.className = "show";
-  result = runCalculator(key);
-  console.log(result);
+  var result = runCalculator(feature);
   answerText.innerText = result;  
 } 
 
@@ -208,7 +204,8 @@ for (key in inputDictionary) {
   var button = document.getElementById(key+"-calc");
   button.addEventListener("click", function(){
     event.preventDefault();
-    clickEvent(key);
+    var prefix = this.id.split("-")[0];
+    clickEvent(prefix);
   })
 }
 
@@ -217,17 +214,19 @@ for (key in inputDictionary) {
 var inputFields = document.getElementsByClassName("form-control");
 for (i=0; i<inputFields.length; i++) {
   var id = inputFields[i].id;
-  // idPrefix = id.split("-")[0] + "-answer";
-  // answerId = idPrefix + "-answer";
-  // var answerField = document.getElementById(id.split("-")[0] + "-answer");
-  // console.log(answerField);
+  idPrefix = id.split("-")[0] + "-answer";
+  answerId = idPrefix + "-answer";
+  var answerField = document.getElementById(id.split("-")[0] + "-answer");
+  console.log(answerField.className);
   inputFields[i].addEventListener("focus", function(){
-    basicAnswer.className="hide";
-    bmiAnswer.className="hide";
-    tripAnswer.className="hide";
-    mortgageAnswer.className="hide";
+    answerField.className = "hide"
+    // basicAnswer.className="hide";
+    // bmiAnswer.className="hide";
+    // tripAnswer.className="hide";
+    // mortgageAnswer.className="hide";
 
   })
 }
+///////////refactoring in progress///////////
 
 
