@@ -88,7 +88,7 @@ function runTripCalculator() {
     alert("The speed is too high for the given Fuel Efficiency in mpg!");
   }
   else {
-    return ("time " + result["time"] + "; cost " + result["cost"]);
+    return ("time: " + result["time"] + " hour(s); cost: GBP" + result["cost"]);
   }
 }
 
