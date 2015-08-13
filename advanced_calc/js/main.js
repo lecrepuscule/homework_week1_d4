@@ -30,7 +30,11 @@ var inputDictionary = {
   }
 };
 
-var eventIds = ["-calc", "-answer", "-answer-alert"];
+var idSuffixes = {
+  button: "-calc", 
+  answerBox: "-answer", 
+  answerText: "-answer-alert"
+};
 
 function runCalculator (feature) {
 
@@ -192,17 +196,17 @@ function doTripCalculation(d, s, mpg, cpg) {
 
 
 function clickEvent (feature) {
-  var feature = feature;
-  var answer = document.getElementById(feature+"-answer");
-  var answerText = document.getElementById(feature+"-answer-alert");
-  answer.className = "show";
-  var result = runCalculator(feature);
-  answerText.innerText = result;  
+  var prefix = feature;
+  // var answer = document.getElementById(feature + idSuffixes.answerBox);
+  // var answerText = document.getElementById(feature+idSuffixes.answerText);
+  document.getElementById(prefix + idSuffixes.answerBox).className = "show";
+  // var result = runCalculator(feature);
+  document.getElementById(prefix + idSuffixes.answerText).innerText = runCalculator(prefix);  
 } 
 
 for (key in inputDictionary) {
-  var button = document.getElementById(key+"-calc");
-  button.addEventListener("click", function(){
+  // var button = document.getElementById(key + idSuffixes.button);
+  document.getElementById(key + idSuffixes.button).addEventListener("click", function(){
     event.preventDefault();
     var prefix = this.id.split("-")[0];
     clickEvent(prefix);
@@ -215,9 +219,9 @@ var inputFields = document.getElementsByClassName("form-control");
 
 for (i=0; i<inputFields.length; i++) {
   inputFields[i].addEventListener("focus", function(){
-    answerFieldId = this.id.split("-")[0] + "-answer";
-    answerField = document.getElementById(answerFieldId);
-    answerField.className = "hide";
+    answerBoxId = this.id.split("-")[0] + idSuffixes.answerBox;
+    // answerBox = document.getElementById(answerBoxId);
+    document.getElementById(answerBoxId).className = "hide";
     // basicAnswer.className="hide";
     // bmiAnswer.className="hide";
     // tripAnswer.className="hide";
