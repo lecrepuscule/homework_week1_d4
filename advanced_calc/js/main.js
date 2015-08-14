@@ -1,11 +1,4 @@
-
-// function runCalculator(feature) {
-//   getInput();
-//   doMath();
-//   showAnswer();
-// }
-
-
+// further refactoring possible if time permits//
 var inputDictionary = {
   basic: {
     firstNum: "basic-num-1",
@@ -30,12 +23,57 @@ var inputDictionary = {
   }
 };
 
+///////////////////////all ids for the relevent html elements are in the form of "feature-suffix", e.g. mortgage-answer, below listener codes are to leverage this fact//////////////////////
+
 var idSuffixes = {
   button: "-calc", 
   answerBox: "-answer", 
-  answerText: "-answer-alert"
+  answerText: "-answer-alert",
 };
 
+createClickEvents();
+createFocusEvents();
+
+
+function clickEvent (feature) {
+  var feature = feature;
+  // var answerBox = document.getElementById(feature + idSuffixes.answerBox);
+  // var answerText = document.getElementById(feature + idSuffixes.answerText);
+  // var result = runCalculator(feature);
+  document.getElementById(feature + idSuffixes.answerText).innerText = runCalculator(feature);  
+  document.getElementById(feature + idSuffixes.answerBox).className = "show";
+} 
+
+function createClickEvents() {
+  for (key in inputDictionary) {
+    // var button = document.getElementById(key + idSuffixes.button);
+    document.getElementById(key + idSuffixes.button).addEventListener("click", function(){
+      event.preventDefault();
+      var prefix = this.id.split("-")[0];
+      clickEvent(prefix);
+    })
+  }
+}
+
+//all relevant input fields have the same class name, "form-control", below are to leverage this fact//
+
+function createFocusEvents() {
+  var inputFields = document.getElementsByClassName("form-control");
+  for (i=0; i<inputFields.length; i++) {
+    inputFields[i].addEventListener("focus", function(){
+      answerBoxId = this.id.split("-")[0] + idSuffixes.answerBox;
+      // answerBox = document.getElementById(answerBoxId);
+      document.getElementById(answerBoxId).className = "hide";
+      // basicAnswer.className="hide";
+      // bmiAnswer.className="hide";
+      // tripAnswer.className="hide";
+      // mortgageAnswer.className="hide";
+    })
+  }
+}
+
+
+///////calculation logics//////////
 function runCalculator (feature) {
 
     switch (feature) {
@@ -90,9 +128,10 @@ function runTripCalculator() {
   var result = doTripCalculation(distance, speed, milePerGallon, costPerGallon);
   if (result["cost"] === "infinite") {
     alert("The speed is too high for the given Fuel Efficiency in mpg!");
+    return NaN;
   }
   else {
-    return ("time: " + result["time"] + " hour(s); cost: GBP" + result["cost"]);
+    return ("time: " + result["time"] + " hour(s); cost: GBP " + result["cost"]);
   }
 }
 
@@ -144,6 +183,11 @@ function doTripCalculation(d, s, mpg, cpg) {
   return {"time": time, "cost": cost};
 }
 
+
+
+
+
+/////////////old code////////////////
 // function getEventIds(feature) {
 //   eventIds.forEach (value, index) {
 //   answer = document.getElementById(feature +"-answer");
@@ -192,42 +236,7 @@ function doTripCalculation(d, s, mpg, cpg) {
 // })
 
 
-///////////////////////refactored//////////////////////
 
-
-function clickEvent (feature) {
-  var prefix = feature;
-  // var answer = document.getElementById(feature + idSuffixes.answerBox);
-  // var answerText = document.getElementById(feature+idSuffixes.answerText);
-  document.getElementById(prefix + idSuffixes.answerBox).className = "show";
-  // var result = runCalculator(feature);
-  document.getElementById(prefix + idSuffixes.answerText).innerText = runCalculator(prefix);  
-} 
-
-for (key in inputDictionary) {
-  // var button = document.getElementById(key + idSuffixes.button);
-  document.getElementById(key + idSuffixes.button).addEventListener("click", function(){
-    event.preventDefault();
-    var prefix = this.id.split("-")[0];
-    clickEvent(prefix);
-  })
-}
-
-
-
-var inputFields = document.getElementsByClassName("form-control");
-
-for (i=0; i<inputFields.length; i++) {
-  inputFields[i].addEventListener("focus", function(){
-    answerBoxId = this.id.split("-")[0] + idSuffixes.answerBox;
-    // answerBox = document.getElementById(answerBoxId);
-    document.getElementById(answerBoxId).className = "hide";
-    // basicAnswer.className="hide";
-    // bmiAnswer.className="hide";
-    // tripAnswer.className="hide";
-    // mortgageAnswer.className="hide";
-  })
-}
 
 
 
